@@ -1,1 +1,21 @@
+import random
+eng_words = [
+    "house","water","fire","light","sun","wind","earth","sky","tree","food",
+    "animal","love","strength","sleep","time","stone","mind","star","river","mountain"
+]
 
+def make_virelan():
+    vowels = "aeiou"
+
+    consonants = "zrtplmvnkbsdgh"
+
+    def syl():
+        return random.choice(consonants) + random.choice(vowels)
+
+    return syl() + syl()
+
+with open("virelan_dictionary.txt", "w") as f:
+    for i in range(600000):
+        vword = make_virelan()
+        eng = random.choice(eng_words)
+        f.write(f"{vword} # {eng}\n")
