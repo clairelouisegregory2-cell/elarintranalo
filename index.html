@@ -1,3 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Élarin Translator</title>
+</head>
+<body>
+
+<input id="word" placeholder="Enter English or Élarin">
+
+<button onclick="translateWord()">
+  Translate
+</button>
+
+<div id="result"></div>
+
 <script>
 const dictionary = {
   elys: "hope",
@@ -9,7 +24,6 @@ const dictionary = {
 };
 
 function translateWord() {
-
   const input =
     document.getElementById("word")
     .value
@@ -36,3 +50,6 @@ function translateWord() {
     "Word not found";
 }
 </script>
+
+</body>
+</html>
