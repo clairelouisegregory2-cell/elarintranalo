@@ -1,49 +1,38 @@
 <script>
-const roots = [
-  "el","va","mor","kyr","ilu",
-  "ny","ser","qir","thal","ryn",
-  "lor","eth","ara","vel","lun"
-];
-
-const meanings = [
-  "hope","wisdom","ocean","love",
-  "time","truth","memory","destiny",
-  "spirit","dream","light","shadow",
-  "path","heart","star"
-];
-
-function generateWord() {
-  let word = "";
-
-  const parts = 2 + Math.floor(Math.random() * 2);
-
-  for(let i = 0; i < parts; i++) {
-    word += roots[Math.floor(Math.random() * roots.length)];
-  }
-
-  return word;
-}
+const dictionary = {
+  elys: "hope",
+  vaelor: "courage",
+  moriq: "ocean",
+  kyrath: "wisdom",
+  ilune: "love",
+  nyther: "time"
+};
 
 function translateWord() {
+
   const input =
     document.getElementById("word")
     .value
     .toLowerCase()
     .trim();
 
-  if(!input) return;
+  if (!input) return;
 
-  let meaning = meanings[0];
-
-  let hash = 0;
-
-  for(let i = 0; i < input.length; i++) {
-    hash += input.charCodeAt(i);
+  if (dictionary[input]) {
+    document.getElementById("result").textContent =
+      input + " → " + dictionary[input];
+    return;
   }
 
-  meaning = meanings[hash % meanings.length];
+  for (const [elarin, english] of Object.entries(dictionary)) {
+    if (english.toLowerCase() === input) {
+      document.getElementById("result").textContent =
+        input + " → " + elarin;
+      return;
+    }
+  }
 
   document.getElementById("result").textContent =
-    input + " → " + meaning;
+    "Word not found";
 }
 </script>
