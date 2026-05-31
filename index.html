@@ -1,27 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Élarin Translator</title>
-</head>
-<body>
-
-<input id="word" placeholder="Enter English or Élarin">
-
-<button onclick="translateWord()">
-  Translate
-</button>
-
-<div id="result"></div>
-
 <script>
-const dictionary = {
-  elys: "hope",
-  vaelor: "courage",
-  moriq: "ocean",
-  kyrath: "wisdom",
-  ilune: "love",
-  nyther: "time"
-};
+function makeElarin(word) {
+  const roots = [
+    "el","va","mor","kyr","ilu",
+    "ny","ser","qir","thal","ryn",
+    "lor","eth","ara","vel","lun"
+  ];
+
+  let hash = 0;
+
+  for (let i = 0; i < word.length; i++) {
+    hash += word.charCodeAt(i);
+  }
+
+  let result = "";
+
+  result += roots[hash % roots.length];
+  result += roots[(hash * 3) % roots.length];
+  result += roots[(hash * 7) % roots.length];
+
+  return result;
+}
 
 function translateWord() {
   const input =
@@ -32,24 +30,8 @@ function translateWord() {
 
   if (!input) return;
 
-  if (dictionary[input]) {
-    document.getElementById("result").textContent =
-      input + " → " + dictionary[input];
-    return;
-  }
-
-  for (const [elarin, english] of Object.entries(dictionary)) {
-    if (english.toLowerCase() === input) {
-      document.getElementById("result").textContent =
-        input + " → " + elarin;
-      return;
-    }
-  }
-
   document.getElementById("result").textContent =
-    "Word not found";
+    input + " → " + makeElarin(input);
 }
 </script>
 
-</body>
-</html>
